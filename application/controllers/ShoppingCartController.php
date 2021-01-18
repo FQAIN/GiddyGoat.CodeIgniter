@@ -70,22 +70,22 @@ class ShoppingCartController extends CI_Controller {
        public function deleteItem() {
         if($this->input->post('class_id'))
         {
-            $delete['class_id'] = $this->input->post('class_id');
+            $delete['id'] = $this->input->post('class_id');
         }
         else if($this->input->post('fabric_id'))
         {
-            $delete['fabric_id'] = $this->input->post('fabric_id');
+            $delete['id'] = $this->input->post('fabric_id');
         }
         else if($this->input->post('notion_id'))
         {
-            $delete['notion_id'] = $this->input->post('notion_id');
+            $delete['id'] = $this->input->post('notion_id');
         }
         
-        $delete['id'] = $this->input->post('id');
+//        $delete['id'] = $this->input->post('id');
 
         $this->ShoppingCartModel->deleteCartItem($delete);
         
-        $data['items'] = $this->ShoppingCartModel->getCartItems($delete['id']);
+        $data['items'] = $this->ShoppingCartModel->getCartItems();
         
         $view_data = array(
                 'content' => $this->load->view('content/view_cart', $data, TRUE)
@@ -96,3 +96,4 @@ class ShoppingCartController extends CI_Controller {
     }
 
 }
+//    WHERE class_id = p_input OR fabric_id = p_input OR notion_id = p_input OR image_path = p_input;

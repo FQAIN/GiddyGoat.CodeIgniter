@@ -13,9 +13,9 @@ class ShoppingCartModel extends CI_Model {
         }
     }
 
-    function getCartItems($data) {
-        $stored_proc_call = "CALL SelectCartPerPageNS(?)";
-        $query = $this->db->query($stored_proc_call, $data);
+    function getCartItems() {
+        $stored_proc_call = "CALL SelectCartPerPageNS()";
+        $query = $this->db->query($stored_proc_call);
 
         mysqli_next_result($this->db->conn_id);
         return $query;
@@ -23,7 +23,7 @@ class ShoppingCartModel extends CI_Model {
     
    
     function deleteCartItem($delete) {
-        $stored_proc_call = "CALL deleteItem(?,?)";
+        $stored_proc_call = "CALL deleteItem(?)";
         $this->db->query($stored_proc_call, $delete);
     }
 
