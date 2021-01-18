@@ -1,14 +1,17 @@
 <?php
 
-class GG extends CI_Controller {
+class GG extends CI_Controller
+{
 
     //Parent Constructer
-    function __construct() {
+    function __construct()
+    {
         parent::__construct();
     }
 
     //function that Loads the default view for the home/index page
-    function index() {
+    function index()
+    {
         $view_data = array(
             'content' => $this->load->view('content/home', null, TRUE),
         );
@@ -18,7 +21,8 @@ class GG extends CI_Controller {
     }
 
     //function that Loads the classes view for the classes page
-    function classes() {
+    function classes()
+    {
         $view_data = array(
             'content' => $this->load->view('content/classes', null, TRUE),
         );
@@ -28,7 +32,8 @@ class GG extends CI_Controller {
     }
 
     //function that Loads the gallery view for the gallery page
-    function gallery() {
+    function gallery()
+    {
         $view_data = array(
             'content' => $this->load->view('content/gallery', null, TRUE),
         );
@@ -38,7 +43,8 @@ class GG extends CI_Controller {
     }
 
     //function that Loads the contact view for the contact page
-    function contact() {
+    function contact()
+    {
         $view_data = array(
             'content' => $this->load->view('content/contact', null, TRUE),
         );
@@ -48,56 +54,81 @@ class GG extends CI_Controller {
     }
 
     //This function is to validate all the fields in the form to check if it is empty (form validation function)
-    function AddEntry() {
+    function AddEntry()
+    {
         $user_validation_rules = array(
-            array('field' => 'fName',
+            array(
+                'field' => 'fName',
                 'label' => 'Firstname',
                 'rules' => 'required',
-                'errors' => array('required' => 'You must provide a %s.')),
-            array('field' => 'lName',
+                'errors' => array('required' => 'You must provide a %s.')
+            ),
+            array(
+                'field' => 'lName',
                 'label' => 'Surname',
                 'rules' => 'required',
-                'errors' => array('required' => 'You must provide a %s.')),
-            array('field' => 'emailAddress',
+                'errors' => array('required' => 'You must provide a %s.')
+            ),
+            array(
+                'field' => 'emailAddress',
                 'label' => 'Email',
                 'rules' => 'required',
-                'errors' => array('required' => 'You must provide an %s.')),
-            array('field' => 'password',
+                'errors' => array('required' => 'You must provide an %s.')
+            ),
+            array(
+                'field' => 'password',
                 'label' => 'Password',
                 'rules' => 'required',
-                'errors' => array('required' => 'You must provide a %s.')),
-            array('field' => 'phone',
+                'errors' => array('required' => 'You must provide a %s.')
+            ),
+            array(
+                'field' => 'phone',
                 'label' => 'Phone',
                 'rules' => 'required',
-                'errors' => array('required' => 'You must provide a %s.')),
-            array('field' => 'addressLine1',
+                'errors' => array('required' => 'You must provide a %s.')
+            ),
+            array(
+                'field' => 'addressLine1',
                 'label' => 'AddressLine1',
                 'rules' => 'required',
-                'errors' => array('required' => 'You must provide an %s.')),
-            array('field' => 'addressLine2',
+                'errors' => array('required' => 'You must provide an %s.')
+            ),
+            array(
+                'field' => 'addressLine2',
                 'label' => 'AddressLine2',
                 'rules' => 'required',
-                'errors' => array('required' => 'You must provide an %s.')),
-            array('field' => 'addressLine3',
+                'errors' => array('required' => 'You must provide an %s.')
+            ),
+            array(
+                'field' => 'addressLine3',
                 'label' => 'AddressLine3',
                 'rules' => 'required',
-                'errors' => array('required' => 'You must provide an %s.')),
-            array('field' => 'city',
+                'errors' => array('required' => 'You must provide an %s.')
+            ),
+            array(
+                'field' => 'city',
                 'label' => 'City',
                 'rules' => 'required',
-                'errors' => array('required' => 'You must provide a %s.')),
-            array('field' => 'county',
+                'errors' => array('required' => 'You must provide a %s.')
+            ),
+            array(
+                'field' => 'county',
                 'label' => 'County',
                 'rules' => 'required',
-                'errors' => array('required' => 'You must provide a %s.')),
-            array('field' => 'country',
+                'errors' => array('required' => 'You must provide a %s.')
+            ),
+            array(
+                'field' => 'country',
                 'label' => 'Country',
                 'rules' => 'required',
-                'errors' => array('required' => 'You must provide a %s.')),
-            array('field' => 'subscribe',
+                'errors' => array('required' => 'You must provide a %s.')
+            ),
+            array(
+                'field' => 'subscribe',
                 'label' => 'Y/N',
                 'rules' => 'required',
-                'errors' => array('required' => 'You must provide a %s.'))
+                'errors' => array('required' => 'You must provide a %s.')
+            )
         );
 
         //Sets the form validation rules
@@ -105,29 +136,46 @@ class GG extends CI_Controller {
 
         //If the user did not enter the form acording to the form validation 
         if ($this->form_validation->run() == FALSE) {
-             //it will Load the AddEntry view again 
+            //it will Load the AddEntry view again 
             $view_data = array(
                 'content' => $this->load->view('content/AddEntry', null, TRUE),
             );
 
             $this->load->view('layoutForRegister', $view_data);
-        } 
+        }
         //Otherwise (if the validation rules have been met succesfully)
         else {
-             //Loads the Model of User from the models folder  
-            $this->load->model('User');
+            //Loads the Model of User from the models folder  
+            $this->load->model('UserService');
             //And gets the functions addUser from the User Model
-            $this->User->addUser();
+
+            $user_data = array(
+                'fName' => $this->input->post('fName'),
+                'lName' => $this->input->post('lName'),
+                'password' => $this->input->post('password'),
+                'phone' => $this->input->post('phone'),
+                'emailAddress' => $this->input->post('emailAddress'),
+                'addressLine1' => $this->input->post('addressLine1'),
+                'addressLine2' => $this->input->post('addressLine2'),
+                'addressLine3' => $this->input->post('addressLine3'),
+                'city' => $this->input->post('city'),
+                'county' => $this->input->post('county'),
+                'country' => $this->input->post('country'),
+                'subscribe' => $this->input->post('subscribe')
+            );
+
+
+            $this->UserService->addUser($user_data);
             $this->index();
         }
     }
 
     //This is the logout function for when a user clicks logout is destroys that specific session
-    function logout() {
+    function logout()
+    {
         unset($_SESSION['loggedIn']);
         $this->session->sess_destroy();
         //Redirects the user back to the index fuction which leads you back to the home page
         redirect('GG/index');
     }
 }
-?>
