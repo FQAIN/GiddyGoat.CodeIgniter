@@ -9,13 +9,13 @@ class Login extends CI_Controller {
 
     public function index() {
         //Loads the user model
-        $this->load->model('User');
+        $this->load->model('UserService');
 
         //If the user presses the login button the post method is invoked
         if ($this->input->post('login')) {
             //The user is checked on wheather it is a valid user by getting the ValidUser method
             //in the User Model and if it is valid
-            if ($this->User->validUser() == true) {
+            if ($this->UserService->validUser() == true) {
                 //It Sets the session userdata to true
                 $this->session->set_userdata('loggedIn', true);
             }
