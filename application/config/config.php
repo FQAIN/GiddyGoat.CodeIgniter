@@ -23,7 +23,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = '';
+$config['base_url'] = 'http://localhost/GiddyGoat.CodeIgniter/';
+$config['css_url'] = 'GiddyGoat.CodeIgniter/assets/css/styles.css';
+$config['image_url'] = 'GiddyGoat.CodeIgniter/assets/images';
+$config['scripts_url'] = 'GiddyGoat.CodeIgniter/assets/scripts';
 
 /*
 |--------------------------------------------------------------------------
