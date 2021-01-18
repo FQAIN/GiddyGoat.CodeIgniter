@@ -62,7 +62,7 @@ $base_url = base_url();
                                         <?php elseif (!$item['notion_id'] == NULL) : ?>
                                             <input type="hidden" name="notion_id" value="<?php echo $item['notion_id']; ?>">
                                         <?php endif; ?>
-                                             <input type="hidden" name="id" value="<?php $item['id']  ?>">
+                                             <input type="hidden" name="id" value="<?php echo $item['id']  ?>">
                                             <input type="submit" class="btn btn-light" value="Delete">
                                         </form>
                                 </td>
